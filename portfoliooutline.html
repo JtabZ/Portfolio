@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYS.JACOB // 2026</title>
+    <link href="style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;400;800&display=swap" rel="stylesheet">
+    
+    <style>
+        .controls-container {
+            margin-bottom: 30px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: var(--card-radius);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .search-bar {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            outline: none;
+            border-radius: 4px;
+        }
+        .search-bar:focus { border-color: var(--accent); }
+
+        .filter-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-select {
+            flex: 1;
+            min-width: 150px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text-mute);
+            padding: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .filter-select:hover { border-color: var(--text-main); }
+        .filter-select:focus { border-color: var(--accent); color: var(--text-main); }
+
+        /* Dynamic Tag Colors based on Type */
+        .lang-tag.tool { color: #FF9F1C; border-color: #FF9F1C; } /* Orange */
+        .lang-tag.guide { color: #2EC4B6; border-color: #2EC4B6; } /* Cyan */
+        .lang-tag.deck { color: #E71D36; border-color: #E71D36; } /* Red */
+        .lang-tag.demo { color: #B388EB; border-color: #B388EB; } /* Purple */
+        .lang-tag.default { color: #888; border-color: #888; }
+
+        /* Repo Link Styling */
+        .repo-link {
+            color: var(--accent);
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            border-left: 2px solid var(--accent);
+            padding-left: 10px;
+        }
+        .repo-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <div class="hud-container">
+        
+        <aside class="sidebar">
+            <div class="logo-mark">/// JZ_26</div>
+            <div class="vertical-text">STATUS_PATERNITY_LEAVE</div>
+            <div class="status-indicator"></div>
+        </aside>
+
+        <main class="main-interface">
+            
+            <header class="top-bar">
+                <div class="breadcrumbs">ROOT / JACOB_ZITKO / <span class="accent">INDEX</span></div>
+                <div class="clock" id="clock">T-MINUS 00:00:00</div>
+            </header>
+
+            <section class="module hero-module">
+                <div class="hero-content">
+                    <h1>DESIGN.<br>ENGINEER.<br><span class="outlined">ARCHITECT.</span></h1>
+                    
+                    <p class="mission-text">
+                        Hello! I put together the past years of resources that I have created or collected for others to use or reference when they have questions or come up against some of the challenges that I’ve encountered. Feel free to <a href="https://www.amazon.com/Steal-Like-Artist-Things-Creative/dp/0761169253" target="_blank" style="color: var(--accent); text-decoration: underline;">steal</a> anything here or to ask me any questions you may have about them!
+                    </p>
+
+                    <div class="action-buttons">
+                        <a href="https://salesforce.enterprise.slack.com/docs/T5J4Q04QG/F0AA88BBEH2" target="_blank" class="btn primary">OPEN SLACK CANVAS -></a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="module grid-module">
+                <div class="module-header">
+                    <span>// REPO_INVENTORY</span>
+                    <span class="tag" id="count-display">LOADING...</span>
+                </div>
+                
+                <div class="controls-container">
+                    <input type="text" id="searchInput" class="search-bar" placeholder="> SEARCH REPOSITORY...">
+                    
+                    <div class="filter-row">
+                        <select id="filterType" class="filter-select">
+                            <option value="">[ALL TYPES]</option>
+                        </select>
+                        <select id="filterTopic" class="filter-select">
+                            <option value="">[ALL TOPICS]</option>
+                        </select>
+                        <select id="filterStage" class="filter-select">
+                            <option value="">[ALL STAGES]</option>
+                        </select>
+                        <select id="filterAudience" class="filter-select">
+                            <option value="">[ALL AUDIENCES]</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="card-grid" id="resourceGrid">
+                    </div>
+            </section>
+
+            <section class="module list-module">
+                <div class="module-header">
+                    <span>// KNOWLEDGE_BASE</span>
+                </div>
+                <div class="data-table">
+                    
+                    <div class="row" style="display:block; padding-top:25px; padding-bottom:10px; color:var(--accent); font-weight:800; letter-spacing:1px; border-bottom:none;">
+                        >> NOTEBOOK_LM / RESEARCH & INFO
+                    </div>
+                    <div class="row">
+                        <div class="cell id">NB_01</div>
+                        <div class="cell name">Informatica Internal Training</div>
+                        <div class="cell type">[NB]</div>
+                        <div class="cell link"><a href="https://notebooklm.google.com/notebook/f5fdb742-e496-43d4-995e-9e468c819f6f" target="_blank">ACCESS -></a></div>
+                    </div>
+                    <div class="row">
+                        <div class="cell id">NB_02</div>
+                        <div class="cell name">Bread Financial AI POC</div>
+                        <div class="cell type">[NB]</div>
+                        <div class="cell link"><a href="https://notebooklm.google.com/notebook/73b12f88-96cd-4c49-a9e1-918ef15cedad" target="_blank">ACCESS -></a></div>
+                    </div>
+                    <div class="row">
+                        <div class="cell id">NB_03</div>
+                        <div class="cell name">Tableau Server Sizing</div>
+                        <div class="cell type">[NB]</div>
+                        <div class="cell link"><a href="https://notebooklm.google.com/notebook/2fd7d5ad-1ff2-457e-a055-6004498a19be" target="_blank">ACCESS -></a></div>
+                    </div>
+
+                    <div class="row" style="display:block; padding-top:25px; padding-bottom:10px; color:var(--accent); font-weight:800; letter-spacing:1px; border-bottom:none;">
+                        >> NOTEBOOK_LM / ACCOUNT NOTES
+                    </div>
+                    <div class="row">
+                        <div class="cell id">AC_01</div>
+                        <div class="cell name">Kearney</div>
+                        <div class="cell type">[NB]</div>
+                        <div class="cell link"><a href="https://notebooklm.google.com/notebook/4efadb4e-7aa4-48ab-9113-689ff2c7faa5" target="_blank">ACCESS -></a></div>
+                    </div>
+                    <div class="row">
+                        <div class="cell id">AC_02</div>
+                        <div class="cell name">American Medical Association (AMA)</div>
+                        <div class="cell type">[NB]</div>
+                        <div class="cell link"><a href="https://notebooklm.google.com/notebook/43616f60-9ea6-4a31-94a9-d02952c43d17" target="_blank">ACCESS -></a></div>
+                    </div>
+                    <div class="row">
+                        <div class="cell id">AC_03</div>
+                        <div class="cell name">WeWork</div>
+                        <div class="cell type">[NB]</div>
+                        <div class="cell link"><a href="https://notebooklm.google.com/notebook/45db276e-6c40-4791-90bf-cc60f72a8402" target="_blank">ACCESS -></a></div>
+                    </div>
+                    <div class="row">
+                        <div class="cell id">AC_04</div>
+                        <div class="cell name">Bread Financial</div>
+                        <div class="cell type">[NB]</div>
+                        <div class="cell link"><a href="https://notebooklm.google.com/notebook/73b12f88-96cd-4c49-a9e1-918ef15cedad" target="_blank">ACCESS -></a></div>
+                    </div>
+                    <div class="row">
+                        <div class="cell id">AC_05</div>
+                        <div class="cell name">QXO / Beacon</div>
+                        <div class="cell type">[NB]</div>
+                        <div class="cell link"><a href="https://notebooklm.google.com/notebook/0f480edb-2340-4a7a-9df8-25023d9e9bf5" target="_blank">ACCESS -></a></div>
+                    </div>
+                    <div class="row">
+                        <div class="cell id">AC_06</div>
+                        <div class="cell name">Keller Williams</div>
+                        <div class="cell type">[NB]</div>
+                        <div class="cell link"><a href="https://notebooklm.google.com/notebook/b637f879-3c11-48a4-851c-2f179e9b04cb" target="_blank">ACCESS -></a></div>
+                    </div>
+                    <div class="row">
+                        <div class="cell id">AC_07</div>
+                        <div class="cell name">Morningstar</div>
+                        <div class="cell type">[NB]</div>
+                        <div class="cell link"><a href="https://notebooklm.google.com/notebook/a966c809-41c9-49b2-b2f4-2deedf5b8584" target="_blank">ACCESS -></a></div>
+                    </div>
+
+                    <div class="row" style="display:block; padding-top:25px; padding-bottom:10px; color:var(--accent); font-weight:800; letter-spacing:1px; border-bottom:none;">
+                        >> DEEP RESEARCH OUTPUTS
+                    </div>
+                    <div class="row">
+                        <div class="cell id">DR_01</div>
+                        <div class="cell name">Tableau Bridge Monitoring on Windows</div>
+                        <div class="cell type">[DOC]</div>
+                        <div class="cell link"><a href="https://docs.google.com/document/d/14OajwRc3SLX0qvzP1ei4L1_bNrBW-C90h_fmKVvWRwA/edit?usp=drive_link" target="_blank">ACCESS -></a></div>
+                    </div>
+                    <div class="row">
+                        <div class="cell id">DR_02</div>
+                        <div class="cell name">MicroStrategy AI Analytics Use Cases</div>
+                        <div class="cell type">[DOC]</div>
+                        <div class="cell link"><a href="https://docs.google.com/document/d/1rNBaOtBXNcEPA-To3OezLT6qeDu0dzR18li8okVvAy4/edit?usp=drive_link" target="_blank">ACCESS -></a></div>
+                    </div>
+                    <div class="row">
+                        <div class="cell id">DR_03</div>
+                        <div class="cell name">Salesforce Analytics Comprehensive Overview</div>
+                        <div class="cell type">[DOC]</div>
+                        <div class="cell link"><a href="https://docs.google.com/document/d/1WptM3_W_NFA85eu0ZVrQIQmvJHBgAVQOohbAHw2UqBs/edit?usp=drive_link" target="_blank">ACCESS -></a></div>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        // 1. Resource Data Database (Merged from CSV and Text File)
+        const resources = [
+            {
+                name: "Tableau Agentic Enterprise Composer",
+                desc: "Tool for conceptualizing AI Agents, business functions, and requirements to prove ROI. Helps address the fact that businesses are having a hard time getting ROI out of AI products.",
+                type: "Tool",
+                topic: "AI/Agents, Agentforce",
+                stage: "Discovery, Scoping",
+                audience: "SE, AE",
+                link: "https://jtabz.github.io/TabAEC/"
+            },
+            {
+                name: "Analytics Capability Matrix",
+                desc: "Diagnostic tool mapping customer analytics maturity (Descriptive to Prescriptive) to identify gaps. Helps move conversations away from generic BI feature comparisons.",
+                type: "Diagnostic Framework",
+                topic: "Maturity Model, Data Cloud",
+                stage: "Discovery, Qualification",
+                audience: "SE, AE",
+                link: "https://jtabz.github.io/analytics-capability-matrix/"
+            },
+            {
+                name: "Tableau Next Demo Guide",
+                desc: "Framework for scoping demos based on timelines (Quick Hit vs. Platform Vision). Bridges customer AI expectations with technical demo reality.",
+                type: "Process Guide",
+                topic: "Demo Strategy, Scoping",
+                stage: "Demo Prep",
+                audience: "SE, AE",
+                link: "https://jtabz.github.io/ae-tabnext-demoguide/"
+            },
+            {
+                name: "Tooling Paradox",
+                desc: "Strategic narrative deck explaining evolution from Tool to System to AI. Addresses 'Tableau Next' positioning and backend complexity.",
+                type: "Strategic Deck",
+                topic: "Platform Vision, Data Cloud",
+                stage: "Vision/Strategy",
+                audience: "Customer, Internal Enablement",
+                link: "https://jtabz.github.io/tool-paradox/"
+            },
+            {
+                name: "AI in Analytics Tension Presentation",
+                desc: "HTML-based presentation covering six core strategic conflicts/tensions in analytics platforms. Narrative for discussing collaboration drama.",
+                type: "Web Presentation",
+                topic: "Strategic Narrative, Soft Skills",
+                stage: "Relationship Building",
+                audience: "SE, AE",
+                link: "https://github.com/JtabZ/foundationaltensions"
+            },
+            {
+                name: "TabNext Agentic AI Shift",
+                desc: "Interactive presentation covering the shift toward agentic AI and Agentforce integration. Positioning Tableau's AI evolution.",
+                type: "Web Presentation",
+                topic: "AI/Agents, Agentforce",
+                stage: "Positioning",
+                audience: "SE, AE",
+                link: "https://jtabz.github.io/TabNextAgenticAIShift/"
+            },
+            {
+                name: "Tableau Server Topology Planner",
+                desc: "Web app for planning multi-node Tableau Server architectures with validation. Features dynamic grid, process assignment, and JSON export.",
+                type: "Web Tool",
+                topic: "Tableau Server, Architecture",
+                stage: "Technical Validation, Implementation",
+                audience: "Architect, SE",
+                link: "https://github.com/JtabZ/TabServerTopologyPlanner"
+            },
+            {
+                name: "Tableau Bridge Guide with Shared Drives",
+                desc: "Runbook for deploying Bridge with on-premise shared network drives. Covers Service Mode vs Live Mode and UNC paths.",
+                type: "Technical Guide",
+                topic: "Tableau Bridge, Hybrid Deployment",
+                stage: "Implementation, Troubleshooting",
+                audience: "SE, IT Ops",
+                link: "https://jtabz.github.io/tabbridgeguidewithshareddrive/"
+            },
+            {
+                name: "Tableau Embedding Playbook",
+                desc: "Demo platform and Next.js guide for composing Tableau capabilities into custom apps. Includes live embedded examples.",
+                type: "Demo Asset, Playbook",
+                topic: "Embedded Analytics, Developer Experience",
+                stage: "POC",
+                audience: "Developer, SE",
+                link: "https://embedding-playbook.vercel.app/"
+            },
+            {
+                name: "Tableau Bridge Guide (Interactive Site)",
+                desc: "Single page website with supplemental documentation and troubleshooting for Bridge. Useful for diagnosing 'works on desktop, fails on server'.",
+                type: "Reference",
+                topic: "Tableau Bridge",
+                stage: "Technical Validation",
+                audience: "SE",
+                link: "https://jtabz.github.io/tabridgedocs/"
+            },
+            {
+                name: "Virtual Connections Guide",
+                desc: "Best practices for Virtual Connections, centralized data access, and row-level security. Interactive single page website.",
+                type: "Guide",
+                topic: "Virtual Connections, Security/Governance",
+                stage: "Technical Validation",
+                audience: "SE",
+                link: "https://jtabz.github.io/vconnguide/"
+            },
+            {
+                name: "Virtual Connections Landing Page",
+                desc: "Supplemental virtual connections resources and examples.",
+                type: "Reference",
+                topic: "Virtual Connections",
+                stage: "Technical Validation",
+                audience: "SE",
+                link: "https://jtabz.github.io/vconns/"
+            },
+            {
+                name: "Databricks & Tableau Integration",
+                desc: "Guide on connectivity, in-database transformations, and future-proofing data strategy. Success stories and best practices.",
+                type: "Integration Guide",
+                topic: "Databricks, Data Strategy",
+                stage: "Technical Validation",
+                audience: "SE",
+                link: "https://jtabz.github.io/databricks-tableau/"
+            },
+            {
+                name: "Tableau Incorta Connection",
+                desc: "Connector documentation and implementation guide for Incorta. Technical reference for customers using Incorta as their data source.",
+                type: "Integration Guide",
+                topic: "Incorta, Connectors",
+                stage: "Implementation",
+                audience: "SE",
+                link: "https://jtabz.github.io/incortaconnection/"
+            },
+            {
+                name: "Data Generator (CBS Suite)",
+                desc: "Streamlit app for generating realistic, interconnected synthetic data for demos. Supports Tech Product/Project metrics.",
+                type: "Web Tool",
+                topic: "Data Generation, Demo Prep",
+                stage: "Demo Prep",
+                audience: "SE",
+                link: "https://github.com/JtabZ/DataGen",
+                github: "https://github.com/JtabZ/DataGen"
+            },
+            {
+                name: "Information Portfolio",
+                desc: "Central hub/portfolio containing descriptions and links to created assets. Useful for referencing older materials.",
+                type: "Portal",
+                topic: "General Enablement",
+                stage: "Research/Reference",
+                audience: "SE, AE",
+                link: "https://jtabz.github.io/infolio/"
+            },
+            {
+                name: "Tableau Cloud QA Explorer",
+                desc: "Guide for Cloud architecture, content promotion, governance, and QA testing. Includes tooling considerations and recommendations.",
+                type: "Guide",
+                topic: "Tableau Cloud, Governance, QA/Testing",
+                stage: "POC",
+                audience: "Admin, SE",
+                link: "https://jtabz.github.io/TabCloudQAExplorer/#introduction"
+            },
+            {
+                name: "Salesforce Analytics Engager",
+                desc: "Resource for Core/Non-specialists to know when and how to bring Analytics into a deal. Originally for Salesforce Core teams.",
+                type: "Enablement Asset",
+                topic: "Sales Strategy, Cross-Cloud",
+                stage: "Prospecting",
+                audience: "AE, Core Sales",
+                link: "https://jtabz.github.io/SFAnalyticsEngager/"
+            },
+            {
+                name: "Salesforce Product Layers",
+                desc: "Visual web app explaining the Salesforce stack (Data, Collection, Analysis, Action). Comprehensive view of solutions.",
+                type: "Visual Aid",
+                topic: "Salesforce Ecosystem, Architecture",
+                stage: "Education",
+                audience: "Customer, SE",
+                link: "https://jtabz.github.io/sf-product-layers/"
+            },
+            {
+                name: "Salesforce and Tableau Data Layers App",
+                desc: "Visual tool for whiteboarding data architecture and semantic layer concepts. Simplified version of the Product Layers app.",
+                type: "Visual Aid",
+                topic: "Data Architecture, Semantic Layer",
+                stage: "Whiteboarding",
+                audience: "SE",
+                link: "https://jtabz.github.io/data-layers-app/"
+            },
+            {
+                name: "Field Service Intelligence Visual Mockup",
+                desc: "Code repository for AI-coding tools to create visual mockups of FSO dashboards. Fixes bad data issues in standard demos.",
+                type: "Code/Repo",
+                topic: "FSO, AI Coding",
+                stage: "Demo Prep",
+                audience: "Technical SE",
+                link: "https://jtabz.github.io/FSO-Intelligence/",
+                github: "https://github.com/JtabZ/FSO-Intelligence"
+            },
+            {
+                name: "Field Service Intelligence Simplified Mockup Tool",
+                desc: "Simplified mockup tool for creating UI/UX paths during discovery. Optimized for filtering and linear clickthrough paths.",
+                type: "Mockup Tool",
+                topic: "FSO, UX Design",
+                stage: "Discovery, Design",
+                audience: "SE",
+                link: "https://jtabz.github.io/FSO-MockupTool/",
+                github: "https://github.com/JtabZ/FSO-MockupTool"
+            },
+            {
+                name: "LBLM Architecture Comparison",
+                desc: "Tool for comparing and explaining LBLM implementation options. Good for customers nervous about using existing Servers or Sites.",
+                type: "Comparison Tool",
+                topic: "Licensing, LBLM",
+                stage: "Architecture",
+                audience: "SE",
+                link: "https://jtabz.github.io/LBLMArchitectureCompare/"
+            },
+            {
+                name: "Filtering Tableau Stories",
+                desc: "Demo asset explaining filtering limitations across Stories and design alternatives. Explains why it is not possible to filter across Stories.",
+                type: "Demo Asset",
+                topic: "Tableau Desktop, Best Practices",
+                stage: "Solutioning",
+                audience: "SE",
+                link: "https://jtabz.github.io/tabstoriesfiltering/"
+            },
+            {
+                name: "Tableau VizQL Data Service Information",
+                desc: "Guide for 'headless BI' using the VizQL API. Decouples the data engine from the viz layer to allow programmatic access.",
+                type: "Technical Guide",
+                topic: "Headless BI, VizQL API, Embedded Analytics",
+                stage: "Technical Validation",
+                audience: "Developer, SE",
+                link: "https://jtabz.github.io/vdskw/"
+            },
+            {
+                name: "AI Maturity Prompt Template Editor",
+                desc: "Tool for generating and testing prompts for Agentforce and Analytic AI use cases.",
+                type: "Tool",
+                topic: "AI/GenAI, Prompt Engineering, Agentforce",
+                stage: "POC",
+                audience: "SE",
+                link: "https://jtabz.github.io/tabaf-prompter/"
+            },
+            {
+                name: "Windows Service Monitoring Information",
+                desc: "Guide and scripts for monitoring critical services like Bridge. Includes PowerShell scripts for automated restarts.",
+                type: "Technical Guide",
+                topic: "Windows Server, Monitoring, Reliability",
+                stage: "Support",
+                audience: "IT Ops, SE",
+                link: "https://jtabz.github.io/windowsservicemonitoring/"
+            },
+            {
+                name: "Tableau Server User Breakdown",
+                desc: "Interactive guide for Admins to define and identify 'active users' for ROI. Helps measure user engagement effectively.",
+                type: "Guide",
+                topic: "Governance, Adoption, ROI",
+                stage: "Customer Success",
+                audience: "Admin, SE",
+                link: "https://jtabz.github.io/tabserverusers/"
+            },
+            {
+                name: "MicroStrategy One Competitive Information",
+                desc: "Deconstructed overview of MicroStrategy ONE ecosystem for competitive differentiation. Maps out AI and BI capabilities.",
+                type: "Competitive Intel",
+                topic: "MicroStrategy, Competitive",
+                stage: "Strategy",
+                audience: "AE, SE",
+                link: "https://jtabz.github.io/microstratone-bread-/"
+            },
+            {
+                name: "Tableau Conference Pulse HOT Session Resources",
+                desc: "Scripts and guides for setting up Cloud sites for concurrent Pulse users. Solves the duplicate metric creation challenge.",
+                type: "Training Resource",
+                topic: "Tableau Pulse, Automation",
+                stage: "Enablement",
+                audience: "Instructor",
+                link: "https://salesforce.quip.com/4L0HOMMyLuVp"
+            }
+        ];
+
+        // 2. DOM Elements
+        const grid = document.getElementById('resourceGrid');
+        const countDisplay = document.getElementById('count-display');
+        const searchInput = document.getElementById('searchInput');
+        const filters = {
+            type: document.getElementById('filterType'),
+            topic: document.getElementById('filterTopic'),
+            stage: document.getElementById('filterStage'),
+            audience: document.getElementById('filterAudience')
+        };
+
+        // 3. Helper Functions
+        function getUniqueValues(key) {
+            // Split comma-separated values and trim whitespace
+            const allValues = resources.flatMap(r => r[key].split(',').map(s => s.trim()));
+            return [...new Set(allValues)].sort();
+        }
+
+        function populateDropdown(selectElement, values) {
+            values.forEach(val => {
+                const option = document.createElement('option');
+                option.value = val;
+                option.textContent = val.toUpperCase();
+                selectElement.appendChild(option);
+            });
+        }
+
+        function getTagClass(type) {
+            const t = type.toLowerCase();
+            if (t.includes('tool') || t.includes('app')) return 'tool';
+            if (t.includes('guide') || t.includes('doc')) return 'guide';
+            if (t.includes('deck') || t.includes('presentation')) return 'deck';
+            if (t.includes('demo') || t.includes('mockup')) return 'demo';
+            return 'default';
+        }
+
+        function renderResources(data) {
+            grid.innerHTML = '';
+            countDisplay.innerText = `VIEW: ${data.length} ITEMS`;
+
+            data.forEach((item, index) => {
+                const idStr = `#${(index + 1).toString().padStart(2, '0')}`;
+                const mainType = item.type.split(',')[0].trim();
+                const tagClass = getTagClass(mainType);
+
+                // Note: Changed from 'a' to 'div' to support nested links
+                const card = document.createElement('div');
+                card.className = 'tech-card';
+
+                // Check for Github Link and append to description
+                let descHtml = item.desc;
+                if(item.github) {
+                    descHtml += `<a href="${item.github}" target="_blank" class="repo-link">> REPO: ${item.github}</a>`;
+                }
+
+                card.innerHTML = `
+                    <div class="card-corner top-left"></div>
+                    <div class="card-corner bottom-right"></div>
+                    
+                    <div class="card-meta">
+                        <span class="id">${idStr}</span>
+                        <span class="lang-tag ${tagClass}">${mainType.toUpperCase()}</span>
+                    </div>
+                    
+                    <h3>${item.name}</h3>
+                    <p>${descHtml}</p>
+                    
+                    <div class="card-footer">
+                        <span class="status-live">● AVAILABLE</span>
+                        <a href="${item.link}" target="_blank" class="link-arrow">ACCESS -></a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterData() {
+            const query = searchInput.value.toLowerCase();
+            const fType = filters.type.value;
+            const fTopic = filters.topic.value;
+            const fStage = filters.stage.value;
+            const fAudience = filters.audience.value;
+
+            const filtered = resources.filter(item => {
+                const matchesSearch = item.name.toLowerCase().includes(query) || 
+                                      item.desc.toLowerCase().includes(query);
+                const matchesType = !fType || item.type.includes(fType);
+                const matchesTopic = !fTopic || item.topic.includes(fTopic);
+                const matchesStage = !fStage || item.stage.includes(fStage);
+                const matchesAudience = !fAudience || item.audience.includes(fAudience);
+
+                return matchesSearch && matchesType && matchesTopic && matchesStage && matchesAudience;
+            });
+
+            renderResources(filtered);
+        }
+
+        // 4. Initialization
+        populateDropdown(filters.type, getUniqueValues('type'));
+        populateDropdown(filters.topic, getUniqueValues('topic'));
+        populateDropdown(filters.stage, getUniqueValues('stage'));
+        populateDropdown(filters.audience, getUniqueValues('audience'));
+
+        // Event Listeners
+        searchInput.addEventListener('input', filterData);
+        Object.values(filters).forEach(select => select.addEventListener('change', filterData));
+
+        // Initial Render
+        renderResources(resources);
+
+        // Simple Clock
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('clock').innerText = "T-MINUS " + now.toLocaleTimeString('en-US', {hour12: false});
+        }, 1000);
+
+    </script>
+</body>
+</html>
